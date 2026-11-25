@@ -1,0 +1,35 @@
+# Mahatva: settings for Apache / cPanel hosting. Other hosts ignore this file.
+DirectoryIndex index.html
+Options -Indexes
+AddDefaultCharset UTF-8
+ErrorDocument 404 /404.html
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType text/javascript .js
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# www.mahatvawellness.com always opens as mahatvawellness.com
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.mahatvawellness\.com$ [NC]
+  RewriteRule ^(.*)$ https://mahatvawellness.com/$1 [R=301,L]
+  # After SSL is active, remove the # from the next two lines to force https
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://mahatvawellness.com/$1 [R=301,L]
+</IfModule>
