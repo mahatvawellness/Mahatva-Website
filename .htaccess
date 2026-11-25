@@ -27,7 +27,7 @@ ErrorDocument 404 /404.html
 # mahatvawellness.com always opens as www.mahatvawellness.com
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^www\.mahatvawellness\.com$ [NC]
+  RewriteCond %{HTTP_HOST} ^mahatvawellness\.com$ [NC]
   RewriteRule ^(.*)$ https://www.mahatvawellness.com/$1 [R=301,L]
   # After SSL is active, remove the # from the next two lines to force https
   # RewriteCond %{HTTPS} off
